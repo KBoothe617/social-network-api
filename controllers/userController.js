@@ -1,10 +1,11 @@
 // import user and thought models
-import { User, Thought } from '../models';
+import User from '../models/user';
+import Thought from '../models/thought';
 
 // export models
 module.exports = {
     // get all users
-    getUsers(req, res) {
+    getUsers(res) {
         User.find()
         .then(users => res.json(users))
         .catch(err => res.status(500).json(err));
