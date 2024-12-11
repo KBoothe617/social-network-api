@@ -44,4 +44,24 @@
         .then(user => user ? res.json(user) : res.status(404).json({ message: 'No user found with this id' }))
         .catch(err => res.status(500).json(err));
     },
+    // add reaction
+    addReaction(req, res) {
+        Thought.findByIdAndUpdate(
+            req.params.thoughtId,
+            { $addToSet: { reactions: req.body } },
+            { new: true }
+        )
+        .then(thought => thought ? res.json(thought) : res.status(404).json({ message: 'No thought found with this id' }))
+        .catch(err => res.status(500).json(err));
+    },
+    // remove reaction
+    removeReaction(req, res) {
+        Thought.findByIdAndUpdate(
+            req.params.thoughtId,
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { new: true }
+        )
+        .then(thought => thought ? res.json(thought) : res.status(404).json({ message: 'No thought found with this id' }))
+        .catch(err => res.status(500).json(err));
+    },
 };
