@@ -1,16 +1,13 @@
-// import the Schema constructor and model function from the Mongoose library
-import { Schema, model, Types } from 'mongoose';
+// import mongoose and schema from mongoose
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-// import the dateFormat function from the utils folder
+// create a new schema for reactions
 const reactionsSchema = new Schema({
-    reactionId: {
-        type: Schema.Types.ObjectId,
-        default: () => new Types.ObjectId()
-    },
     reactionBody: {
         type: String,
         required: true,
-        maxLength: 280
+        maxlength: 280
     },
     username: {
         type: String,
@@ -19,7 +16,7 @@ const reactionsSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal)
+        get: (createdAtVal) => new Date(createdAtVal).toLocaleString()
     }
 }, {
     toJSON: { getters: true },

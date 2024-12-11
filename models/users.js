@@ -1,5 +1,6 @@
-// import schem and model from mongoose
-import { Schema, model } from 'mongoose';
+// import mongoose and schema from mongoose
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 // create a new schema
 const userSchema = new Schema({
