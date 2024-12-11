@@ -41,4 +41,10 @@ module.exports = {
         .then(user => user ? res.json(user) : res.status(404).json({ message: 'No user found with this id!' }))
         .catch(err => res.status(500).json(err));
     },
+    // remove a friend from a user's friend list
+    removeFriend(req, res) {
+        User.findByIdAndUpdate(req.params.id, { $pull: { friends: req.params.friendId } }, { new: true })
+        .then(user => user ? res.json(user) : res.status(404).json({ message: 'No user found with this id!' }))
+        .catch(err => res.status(500).json(err));
+    },
 };
