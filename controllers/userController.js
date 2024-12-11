@@ -29,4 +29,16 @@ module.exports = {
         .then(user => user ? res.json(user) : res.status(404).json({ message: 'No user found with this id!' }))
         .catch(err => res.status(500).json(err));
     },
+    // delete user by id
+    deleteUser(req, res) {
+        User.findByIdAndDelete(req.params.id)
+        .then(user => user ? res.json(user) : res.status(404).json({ message: 'No user found with this id!' }))
+        .catch(err => res.status(500).json(err));
+    },
+    // add a friend to a user's friend list
+    addFriend(req, res) {
+        User.findByIdAndUpdate(req.params.id, { $addToSet: { friends: req.params.friendId } }, { new: true })
+        .then(user => user ? res.json(user) : res.status(404).json({ message: 'No user found with this id!' }))
+        .catch(err => res.status(500).json(err));
+    },
 };
