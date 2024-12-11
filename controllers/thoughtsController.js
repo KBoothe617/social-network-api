@@ -1,6 +1,6 @@
  // import user and thought models
-import User from '../models/user';
-import Thought from '../models/thought';
+import User from '../models/users.js';
+import Thought from '../models/thoughts.js';
 
  module.exports = {
     // get thoughts
